@@ -21,9 +21,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('e_app.urls')),
-    path('search/', include('searchapp.urls')),
     path('cart/', include('cart.urls')),
+    path('search/', include('searchapp.urls')),
+    path('', include('e_app.urls')),  # store at root
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

@@ -12,14 +12,14 @@ body{
     text-transform : uppercase;
 }
 .my_footer{
-    background-color: grey;
-    height: 150px;
+    background-color: #898AC4 !important;
+    height: 100px;
 }
 .my_footer p{
     padding-top: 20px;
     font-size: 14px;
     color: white;
-    }
+}
 .my_row_class{
     padding-top: 15px;
 }
