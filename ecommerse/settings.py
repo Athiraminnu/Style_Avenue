@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hv*!2x*@*6r502rep)vd-xtux1(8n+fy7yttz^sxg*r5dkw&i2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -78,14 +78,24 @@ WSGI_APPLICATION = 'ecommerse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mens_styles',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#     }
+# }
+# for converting the db to postgresql
+import os
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mens_styles',
-        'USER': 'root',
-        'PASSWORD': 'root',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL")  # Render will provide this automatically
+    )
 }
+
 
 
 # Password validation
@@ -121,13 +131,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+#
+# STATIC_URL = 'static/'
+#
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,  'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR,  'assets')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,  'media')
 
-STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR,  'static')]
-STATIC_ROOT = os.path.join(BASE_DIR,  'assets')
+# for render
+STATIC_URL = '/static/'
+# Where Django will collect all static files for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Extra places Django will look for static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# Media files (user uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,  'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
